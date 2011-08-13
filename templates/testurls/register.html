@@ -1,0 +1,27 @@
+<html>
+<body>
+<div id='replay' style='display:none;'>
+    <img id="crosshair" alt="" src="/site_media/image/cursor.gif"/>
+    <img id='click' alt='' src="/site_media/image/star32x32.png"/>
+</div>
+
+    This is the register page
+</body>
+  <script type='text/javascript'  src='/site_media/js/prototype.js'></script>
+  <script type='text/JavaScript' src='/site_media/js/recordstory.js'></script>
+  <script type='text/JavaScript' src='/site_media/js/record.js'></script>
+  <script type='text/JavaScript' src='/site_media/js/effects.js'></script>
+  <script type="text/javascript">
+        if ('{{run_experiment}}' == 'True') {
+            run_experiment()
+        } else {
+            function repeat_mouse_motions() {
+                $('replay').show()
+                {{ output_string|safe }}
+            }
+            if (gup('show_video')) {
+                repeat_mouse_motions();
+            }
+        }
+    </script>
+</html>
