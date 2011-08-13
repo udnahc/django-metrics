@@ -1,0 +1,7 @@
+This is a very basic web analytics project in DJango
+** Capture events like Google Analytics and view them real time in 
+   the django admin. Use a Javascript code and see results in real time 
+   like mixpanel.
+
+** Capture mouse motion like Click Tale but it closely coupled with python
+   code as of now.
