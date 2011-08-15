@@ -29,3 +29,9 @@ urlpatterns += patterns('testurls.views',
   (r'^home_page/$','home_page',{'home_page_template':'testurls/home.html'},'home_page'),
   (r'^register_page/$','register_page',{'register_page_template':'testurls/register.html'},'register_page'),
 )
+
+urlpatterns += patterns('reportingtool.views',
+  (r'^t_report/$','view_bi_report', {'bi_report_template':'reportingtool/bi_report.html'},'bi-report'),
+  (r'^show_graph/$', 'view_chart_data', {'show_graph_template':'reportingtool/show_chart.html'},'show-chart'),
+  (r'^return_csv/$', 'return_csv', {}),
+)

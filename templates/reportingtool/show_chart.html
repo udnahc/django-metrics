@@ -1,0 +1,22 @@
+<html>
+  <head>
+    
+    <link href="/site_media/css/pop.css" media="all" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/site_media/js/flash/swfobject.js"></script>
+    <script type="text/javascript">
+      swfobject.embedSWF(
+      "/site_media/js/flash/open-flash-chart.swf", "chart_demo",
+      "1200", "200", "9.0.0", "/site_media/js/flash/expressInstall.swf",
+      {"data-file":{{chart_data|safe}} } );
+    </script>
+
+  </head>
+
+  <body>
+    <h6>Show Graph</h6>
+    <div id='chart_container'>
+      <div class="chart" id="chart_demo"></div>
+    </div>
+  </body>
+
+</html>

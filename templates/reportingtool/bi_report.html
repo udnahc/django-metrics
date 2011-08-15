@@ -1,0 +1,86 @@
+{% extends "admin/change_list.html" %}
+{% load adminmedia admin_list i18n %}
+
+{% block extrastyle %}
+<link href="/site_media/css/pop.css" media="all" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/site_media/js/flash/swfobject.js"></script>
+
+<!--Load the AJAX API-->
+<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+<!-- script type='text/javascript'>
+  google.load('visualization', '1', {'packages':['annotatedtimeline']});
+  google.setOnLoadCallback(show_graph);
+
+  function show_graph() {
+      datasource = new google.visualization.Query('/show_graph/?id=' + {{rt.id}});
+      var id = document.getElementById('chart_div');
+      var graph = new google.visualization.AnnotatedTimeLine(id);
+      datasource.send(function(response) {
+      graph.draw(response.getDataTable(), {wmode: 'opaque'});
+  });
+  }
+</script-->
+
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+{% if cl.formset %}
+<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
+{% url admin:jsi18n as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+{% endif %}
+{{ media }}
+{% if not actions_on_top and not actions_on_bottom %}
+<style>
+  #changelist table thead th:first-child {width: inherit}
+</style>
+{% endif %}
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% block coltype %}flex{% endblock %}
+{%block content%}
+
+
+<div id="content" class="flex">
+  <!-- div id="chart_div" style="width: 1100px; height: 400px;"></div-->
+
+  <div id='_blank'>&nbsp;</div>
+  <div id='_blank'>&nbsp;</div>
+  <h1>{{rt.name}}</h1>
+  <div id="content-main">
+    <ul class='object-tools'>
+      <li>
+	<a class="addlink" href="/return_csv?id={{rt.id}}">Export report data to CSV</a>
+      </li>
+    </ul>
+    <div class="module" id="changelist">
+      {% block result_list %}
+      {% if rcl.results %}
+      <table cellspacing="0">
+        <thead>
+	  <tr>
+	    {% for header in rcl.result_headers  %}
+	    <th class="{{header.class}}">			  			       
+	      <a href='{{header.url}}'>{{ header.value|capfirst }}</a>
+            </th>
+	    {% endfor %}
+	  </tr>
+	</thead>
+	{% for result in rcl.result_list %}
+	<tr class="{% cycle 'row1' 'row2' %}">
+	  {% for item in result %}
+	  <td>
+	    {{ item|safe }}
+	  </td>
+	  {% endfor %}
+	</tr>
+	{% endfor %}
+
+      </table>
+      {% endif %}
+      {% endblock %}
+      {% block pagination %}{% pagination rcl %}{% endblock %}
+    </div>
+  </div>
+  {% endblock %}
